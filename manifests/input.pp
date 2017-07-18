@@ -33,9 +33,16 @@ define telegraf::input (
     validate_hash($sections)
   }
 
-  Class['::telegraf::config']
-  -> file {"${telegraf::config_folder}/${name}.conf":
-    content => template('telegraf/input.conf.erb')
+  concat::fragment{ "telegraf_input_$name":
+    target  => "${telegraf::config_folder}/telegraf.conf",
+    content => template('telegraf/input.conf.erb'),
+    order   => '10',
   }
-  ~> Class['::telegraf::service']
+
+  #  Class['::telegraf::config']
+  #-> file {"${telegraf::config_folder}/${name}.conf":
+  #  content => template('telegraf/input.conf.erb')
+  #}
+
+  #~> Class['::telegraf::service']
 }

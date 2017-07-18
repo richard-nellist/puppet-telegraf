@@ -12,7 +12,7 @@ class telegraf::config inherits telegraf {
       content => template('telegraf/telegraf.conf.erb'),
       owner   => $::telegraf::config_file_owner,
       group   => $::telegraf::config_file_group,
-      mode    => '0640',
+      mode    => '0777',
       notify  => Class['::telegraf::service'],
       require => Class['::telegraf::install'],
     ;
@@ -20,12 +20,16 @@ class telegraf::config inherits telegraf {
       ensure  => directory,
       owner   => $::telegraf::config_file_owner,
       group   => $::telegraf::config_file_group,
-      mode    => '0770',
+      mode    => '0777',
       purge   => $::telegraf::purge_config_fragments,
       recurse => true,
       notify  => Class['::telegraf::service'],
       require => Class['::telegraf::install'],
     ;
+  }->
+
+  concat { "${telegraf::config_folder}/telegraf.conf":
+    mode => '0777'
   }
 
 }
