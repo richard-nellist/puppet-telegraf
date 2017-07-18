@@ -38,11 +38,4 @@ define telegraf::input (
     content => template('telegraf/input.conf.erb'),
     order   => '10',
   }
-
-  #  Class['::telegraf::config']
-  #-> file {"${telegraf::config_folder}/${name}.conf":
-  #  content => template('telegraf/input.conf.erb')
-  #}
-
-  #~> Class['::telegraf::service']
 }
