@@ -120,12 +120,12 @@ class telegraf (
   $windows_package_url    = $telegraf::params::windows_package_url,
   $service_enable         = $telegraf::params::service_enable,
   $service_ensure         = $telegraf::params::service_ensure,
+  $service_restart        = $telegraf::params::service_restart,
   $install_options        = $telegraf::params::install_options,
 ) inherits ::telegraf::params
 {
 
   $service_hasstatus = $telegraf::params::service_hasstatus
-  $service_restart   = $telegraf::params::service_restart
 
   validate_string($package_name)
   validate_string($ensure)
