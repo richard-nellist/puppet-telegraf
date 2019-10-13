@@ -57,9 +57,5 @@ class telegraf::params {
   }
 
   $inputs = {
-    'cpu'  => {
-      'percpu'   => true,
-      'totalcpu' => true,
-    }
   }
 }
